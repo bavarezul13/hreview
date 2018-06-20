@@ -1,0 +1,5 @@
+<input type="file" id="file" name="file" (change)="uploadFile($event)" placeholder="Upload file" accept=".jpeg,.doc,.docx"/>
+<input type="submit" (click)="downloadFile()"/>
+<video *ngIf="url" width="400" controls>
+    <source [src]="_sanitizer.bypassSecurityTrustResourceUrl(url)" type="video/mp4">
+  </video>

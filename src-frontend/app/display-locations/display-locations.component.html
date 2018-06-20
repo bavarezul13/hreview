@@ -1,0 +1,35 @@
+<div>
+    {{pageTitle}}
+</div>
+
+
+Filter by: <input [(ngModel)] = 'listFilter'>
+
+<table class="table table-striped table-dark" *ngIf='locations && locations.length'>
+    <thead>
+      <tr>
+        <th scope="col">
+            <button class="btn btn-primary" (click)='toggleShowImages()'>
+                {{showImages ? 'Hide' : 'Show'}} images
+            </button>
+        </th>
+        <th scope="col">Location</th>
+        <th scope="col">Location Code</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Distance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let location of filteredLocations'>
+        <td >
+            <img *ngIf='showImages' [src]='location.imageUrl' alt="">
+        </td>
+        <td><a [routerLink]="['/locations', location.locationId]">{{location.name}}</a></td>
+        <td>{{location.locationCode | convertToSpaces:'-'}}</td>
+        <td><star-rating [rating]='location.starRating' (ratingClicked)='onRatingClicked($event)'></star-rating></td>
+        <td>{{location.distance}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-primary" (click)="goToHomePage()">Go to Homepage</button>
